@@ -199,3 +199,77 @@ These layers are as follows:
 - Object-Oriented Approach
 - Event-Driven
 - Corporate Support
+
+
+
+Learning the MERN stack will help you become a full-stack developer. The demand for MERN stack developers is also high. However, it takes time to be a good MERN stack developer. So, before learning technologies like React or Node.js, it is important to ensure that your fundamentals are strong. A lot of developers fail to be good MERN stack developers because they lack the 
+<a href="https://blog.logrocket.com/javascript-concepts-before-learning-react/">fundamental knowledge of JavaScript.</a>
+
+
+## Server setup with Express.js and Node.js
+
+### npm package initialization
+
+Enter the folder through the terminal, then run $ npm init. Then, it will ask you some questions about the package name, version, entry point, and more.
+
+<img src="./img/npm_init.png">
+
+Select yes, and you’re ready to go. This will create a file named package.json in same folder.
+
+### Installing the dependencies
+We’ll add some dependencies with 
+> $ npm i express mongoose body-parser config. 
+
+<img src="./img/dependency.png">
+
+- body-parser: Allows us to get the data throughout the request
+- express: Is our main framework
+- mongoose: Is used to connect and interact with MongoDB
+- config: This lets you define default parameters for your application
+
+Install nodemon with 
+>$ npm i -D nodemon. 
+
+To use nodemon, add "server": "nodemon server.js" to your scripts tag under the package.json file.
+
+Nodemon is a utility that will monitor for any changes in your source and automatically restart your server.
+
+<img src="./img/nodemon.png">
+
+After that, your package.json should look like this:
+
+<img src ="./img/package_json.png">
+
+Setting the entry point:
+
+create a file named server.js for our entry point.
+
+Then paste the following code:
+
+<code>// server.js
+
+const express = require('express');
+
+const app = express();
+
+app.get('/', (req, res) => res.send('Hello world!'));
+
+const port = process.env.PORT || 2025;
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
+</code>
+
+After that, run the 
+> $ node server.js
+
+<img src="./img/server.png">
+At this point, if we change anything, we’ll need to restart the server manually. But, if we set up nodemon, then we don’t have to restart it every time. Nodemon will watch if there is any change and restart the server automatically.
+
+you can run your project using the 
+>$ npm run server
+
+<img src="./img/nodemon_server.png">
+
+You will see Server running on port 2025. You can also check it from the browser by opening the browser and entering http://localhost:2025.
+
+<img src="./img/browser.png">
