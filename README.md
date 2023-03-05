@@ -273,3 +273,79 @@ you can run your project using the
 You will see Server running on port 2025. You can also check it from the browser by opening the browser and entering http://localhost:2025.
 
 <img src="./img/browser.png">
+
+## Database management with MongoDB
+
+For simplicity, we will use MongoDB Atlas. First, create an account <a href="https://www.mongodb.com/atlas/database"> here</a>. After creating an account, you will see something like this:
+
+<img src="./img/atlas.png">
+
+Click the <b>Project 0</b> section (top left), and you will see a button for Creating a New Project. Create a project and select the project. Now, click the <b>Build a Database</b> button from the project you have created. It will show you all the information.
+
+At the bottom, you will see a section called <b>Cluster Name</b>, click that and enter a name for the database, then hit the <b>Create Cluster</b> button. After two to three minutes, if everything goes well, you will find something like this:
+<img src="./img/database.png">
+
+Click the CONNECT button if you filled the username and password for your database at time of creation it will show you like this:
+
+<img src="./img/idpass_config.png">
+
+Now, if you follow the CONNECT button or the Choose a connection method button, you will see some different methods. Select accordingly:
+<img src="./img/connect_cluster.png">
+
+In this case, select the Connect Your Application section. Now, you will get your database link, which we will use in our next step:
+
+<img src="./img/connection_string.png">
+
+### Adding the database to our project
+
+Our database is ready, and we need to add it to our project. Inside the project folder, create another folder named <b>config</b> and create two files named <b>default.json</b> and <b>db.js</b>.
+
+Add the following code:
+<code>
+// default.json
+
+{
+  "mongoURI":
+    "mongodb+srv://mern123:<password>@mernatoz-9kdpd.mongodb.net/test?retryWrites=true&w=majority"
+}
+ /* Replace <password> with your database password */
+ </code>
+
+ <code>
+ // db.js
+
+const mongoose = require('mongoose');
+const config = require('config');
+const db = config.get('mongoURI');
+
+const connectDB = async () => {
+  try {
+    mongoose.set('strictQuery', true);
+    await mongoose.connect(db, {
+      useNewUrlParser: true,
+    });
+
+    console.log('MongoDB is Connected...');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;
+</code>
+
+We need a little change in our server.js file to connect to the database. Update your server.js by adding this:
+<code>
+const connectDB = require('./config/db');
+
+// Connect Database
+connectDB();
+</code>
+
+Now, you can run the project using the 
+>$ npm run server
+
+You should see the following:
+
+<img src="./img/server_with_db.png">
